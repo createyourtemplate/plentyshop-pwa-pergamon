@@ -1,0 +1,34 @@
+{
+    "Header": {
+        "Store Finder": "Store Finder",
+        "Mein Viania": "Mein Viania",
+        "Merkliste": "Merkliste"
+    },
+    "Footer": {
+        "Fragen1": "Du hast Fragen?",
+        "Fragen2": "Wir sind für dich da",
+        "Hotline": "+49 7473 94350",
+        "Email": "{'onlineshop@viania.de'}",
+        "Service-Zeiten": {
+            "1": "Du erreichst uns:",
+            "2": "Montag - Freitag 11 - 16 Uhr"
+        },
+        "Service": "Service",
+        "newsletter1": "Newsletter",
+        "newsletter2": "Freue dich über 5€ Rabatt bei deiner nächsten Bestellung und profitiere von Angeboten.",
+        "newsletter3": "Newsletter abonnieren",
+        "newsletter4": "Deine E-Mail Adresse",
+        "copyRight": {
+            "1": "Alle Preise inkl. MwSt. und zzgl. Versandkosten.",
+            "2": "Kostenloser Versand und Rückversand nur innerhalb Deutschlands und Österreichs."
+        }
+    },
+    "SizeTable": "zur Größentabelle",
+    "Filter": "Filtern & Sortieren",
+    "Filter2": "Filtern nach",
+    "sortType.PriceDown": "Preis absteigend",
+    "sortType.PriceUp": "Preis aufsteigend",
+    "sortType.NameA-Z": "Name aufsteigend",
+    "sortType.NameZ-A": "Name absteigend",
+    "Merkliste": "Meine Merkliste"
+}
