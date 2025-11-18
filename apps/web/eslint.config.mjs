@@ -14,7 +14,7 @@ export default withNuxt(
     maxLines: 500,
     maxLinesPerFunction: 1000, // target: 100
     maxStatements: 150, // target: 15
-    maxNestedCallbacks: 30, // target: 3
+    maxNestedCallbacks: 3,
     maxParams: 4
   }),
   ecma({
@@ -45,6 +45,7 @@ export default withNuxt(
      */
     rules: {
       'arrow-parens': ['error', 'always'],
+      'jsonc/no-useless-escape': 'off', // incompatible with ESLint 9, affects postCodeMapper.json
       'no-console': ['error'],
       'no-constant-binary-expression': 'off',
       '@typescript-eslint/no-unused-expressions': ['error', { allowTernary: true }],

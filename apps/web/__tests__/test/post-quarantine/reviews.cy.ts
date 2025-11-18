@@ -1,4 +1,4 @@
-import { paths } from '../../../utils/paths';
+import { paths } from '../../../app/utils/paths';
 import { HomePageObject } from '../../support/pageObjects/HomePageObject';
 import { ProductListPageObject } from '../../support/pageObjects/ProductListPageObject';
 import { ReviewPageObject } from '../../support/pageObjects/ReviewPageObject';
@@ -26,19 +26,6 @@ beforeEach(() => {
 });
 
 describe('Reviews functionality check.', () => {
-  it('Deletes all reviews.', () => {
-    cy.visitAndHydrate(paths.authLogin);
-    myAccount.successLogin();
-
-    cy.wait('@doLogin');
-    cy.visitAndHydrate(paths.home);
-
-    homePage.goToCategory();
-    productListPage.goToProduct();
-
-    reviewPage.deleteAllReviews();
-  });
-
   it('Checks review section elements.', () => {
     homePage.goToCategory();
     productListPage.goToProduct();

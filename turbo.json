@@ -30,12 +30,18 @@
       "outputs": []
     },
     "test:coverage": {
-      "outputs": []
+      "outputs": ["coverage/**"]
     },
     "test:watch": {
       "cache": false
     },
     "test:cypress-checkout": {
+      "cache": false
+    },
+    "test:cypress-external": {
+      "cache": false
+    },
+    "test:cypress-feature": {
       "cache": false
     },
     "test:cypress-paypal": {
