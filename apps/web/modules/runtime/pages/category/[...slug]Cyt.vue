@@ -6,7 +6,7 @@
     :class="{ 'pointer-events-none opacity-50': loading }"
   >
     <SfLoaderCircular v-if="loading" class="fixed top-[50%] right-0 left-0 m-auto z-[99999]" size="2xl" />
-    <template v-if="isEditablePage && runtimeConfig.public.isDev">
+    <template v-if="isEditablePage">
       <EditablePage :identifier="categoryGetters.getId(productsCatalog.category)" :type="'category'" />
     </template>
     <template v-else>
@@ -18,8 +18,14 @@
         :items-per-page="Number(productsPerPage)"
       >
         <template #sidebar>
-          <CategoryFilters v-if="facetGetters.hasFilters(productsCatalog.facets)" :facets="productsCatalog.facets" />
-          <CategorySorting />
+          <!-- <CategoryTree :category="productsCatalog.category" /> -->
+          <div class="flex flex-col-reverse md:flex-row justify-end md:justify-between md:items-center md:bg-[#f7f7f7] md:px-[20px] md:mb-2.5 py-2 mb-3">
+            <CategoryFilters v-if="facetGetters.hasFilters(productsCatalog.facets)" :facets="productsCatalog.facets" />
+            <CategorySorting />
+            <div class="px-2" v-if="viewport.isLessThan('lg') && facetGetters.hasFilters(productsCatalog.facets)">
+              <SelectedFilters :facets="productsCatalog.facets" />
+            </div>
+          </div>
         </template>
       </CategoryPageContent>
     </template>
@@ -35,13 +41,14 @@ definePageMeta({ layout: false, middleware: ['category-guard'] });
 const { t, locale } = useI18n();
 const route = useRoute();
 const router = useRouter();
+const viewport = useViewport();
 const { setCategoriesPageMeta } = useCanonical();
 const { getFacetsFromURL, checkFiltersInURL } = useCategoryFilter();
 const { fetchProducts, data: productsCatalog, productsPerPage, loading } = useProducts();
 const { data: categoryTree } = useCategoryTree();
+
 const { buildCategoryLanguagePath } = useLocalization();
 const { isEditablePage } = useToolbar();
-const runtimeConfig = useRuntimeConfig();
 
 const breadcrumbs = computed(() => {
   if (productsCatalog.value.category) {
@@ -57,6 +64,8 @@ const breadcrumbs = computed(() => {
   return [];
 });
 
+const canonicalDb = productsCatalog.value.category?.details[0].canonicalLink;
+
 const handleQueryUpdate = async () => {
   await fetchProducts(getFacetsFromURL()).then(() => checkFiltersInURL());
 
@@ -68,7 +77,7 @@ const handleQueryUpdate = async () => {
   }
 };
 
-await handleQueryUpdate().then(() => setCategoriesPageMeta(productsCatalog.value, getFacetsFromURL()));
+await handleQueryUpdate().then(() => setCategoriesPageMeta(productsCatalog.value, getFacetsFromURL(), canonicalDb));
 
 const { setPageMeta } = usePageMeta();
 const categoryName = computed(() => categoryGetters.getCategoryName(productsCatalog.value.category));
@@ -87,20 +96,20 @@ watch(
 
 const headTitle = computed(() =>
   productsCatalog.value?.category
-    ? (categoryGetters.getMetaTitle(productsCatalog.value.category) || process.env.METATITLE) ?? ''
-    : process.env.METATITLE ?? '',
+    ? ((categoryGetters.getMetaTitle(productsCatalog.value.category) || process.env.METATITLE) ?? '')
+    : (process.env.METATITLE ?? ''),
 );
 
 const descriptionContent = computed(() =>
   productsCatalog.value?.category
-    ? (categoryGetters.getMetaDescription(productsCatalog.value.category) || process.env.METADESC) ?? ''
-    : process.env.METADESC ?? '',
+    ? ((categoryGetters.getMetaDescription(productsCatalog.value.category) || process.env.METADESC) ?? '')
+    : (process.env.METADESC ?? ''),
 );
 
 const keywordsContent = computed((): string =>
   productsCatalog.value?.category
-    ? (categoryGetters.getMetaKeywords(productsCatalog.value.category) || process.env.METAKEYWORDS) ?? ''
-    : process.env.METAKEYWORDS ?? '',
+    ? ((categoryGetters.getMetaKeywords(productsCatalog.value.category) || process.env.METAKEYWORDS) ?? '')
+    : (process.env.METAKEYWORDS ?? ''),
 );
 
 const robotsContent = computed((): string =>
@@ -113,6 +122,10 @@ watch(
     await handleQueryUpdate().then(() => setCategoriesPageMeta(productsCatalog.value, getFacetsFromURL()));
   },
 );
+
+watchEffect(() => {
+  route.meta.isBlockified = isEditablePage;
+});
 
 useHead({
   title: headTitle,

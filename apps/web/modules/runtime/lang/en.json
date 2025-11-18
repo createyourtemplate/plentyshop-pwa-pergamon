@@ -1,11 +1,30 @@
 {
-    "Header": {
-        "Store Finder": "Store Finder",
-        "Mein Viania": "My Viania",
-        "Merkliste": "Wishlist"
+    "header": {
+        "freeShippingGermany": "Kostenloser Versand innerhalb Deutschlands"
     },
-    "Footer": {
-        "Fragen": "Du hast Fragen?",
-        "Service": "Service"
+    "footer": {
+        "heading": {
+            "myAccount": "Mein Konto",
+            "info": "Informationen",
+            "legal": "Rechtliches",
+            "trustAndBuy": "Sicher und vertrauensvoll einkaufen"
+        },
+        "info": "Informationen",
+        "login": "Login",
+        "register": "Registrieren",
+        "cart": "Warenkorb",
+        "aboutUs": "Über uns",
+        "shippingInformation": "Versandinformationen",
+        "paymentInformation": "Zahlungsarten",
+        "returns": "Retouren",
+        "cancellationRights": "Widerrufsrecht",
+        "legalDisclosure": "Impressum",
+        "privacyPolicy": "Datenschutz",
+        "termsAndConditions": "AGB",
+        "declarationOfAccessibility": "Barrierefreiheitserklärung",
+        "copyRight": {
+            "1": "Alle Preise inkl. MwSt. und zzgl. Versandkosten.",
+            "2": "Kostenloser Versand und Rückversand nur innerhalb Deutschlands und Österreichs."
+        }
     }
 }

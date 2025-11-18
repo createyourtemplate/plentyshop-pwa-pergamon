@@ -1,38 +1,37 @@
 <template>
   <nav
-    class="flex justify-between items-end pt-[30px]"
+    class="flex justify-center items-end gap-2 mt-xl"
     role="navigation"
     :aria-label="t('pagination')"
     data-testid="pagination"
   >
     <UiButton
-      size="lg"
       :aria-label="t('prevAriaLabel')"
       :disabled="pagination.selectedPage <= 1 || disabled"
-      variant="tertiary"
-      class="gap-3"
+      variant="secondary"
+      :square="true"
+      class="!rounded-none !w-10 !h-10 hover:!bg-black hover:!text-white active:!bg-black active:!text-white"
       data-testid="pagination-previous"
       @click="previousPage"
     >
       <template #prefix>
         <SfIconChevronLeft />
       </template>
-      <span class="hidden sm:inline-flex">{{ t('prev') }}</span>
     </UiButton>
-    <ul class="flex justify-center gap-[10px]">
+    <ul class="flex justify-center gap-2.5">
       <li v-if="!pagination.pages.includes(1)">
         <div
           :class="[
             'flex',
-            { 'font-medium border-t-4 !border-primary-500': pagination.selectedPage === 1 },
+            { 'font-medium': pagination.selectedPage === 1 },
           ]"
         >
           <button
             type="button"
             :class="[
-              'px-4 py-3 md:w-12 rounded-md text-neutral-500',
+              'w-10 h-10 border border-black',
               {
-                'hover:bg-black hover:text-primary-800 active:bg-black active:text-white': !disabled,
+                'hover:bg-black hover:text-white active:bg-black active:text-white': !disabled,
               },
             ]"
             :aria-current="pagination.selectedPage === 1 || disabled"
@@ -45,7 +44,7 @@
       </li>
       <li v-if="pagination.startPage > 2">
         <div class="flex">
-          <button type="button" disabled aria-hidden="true" class="px-4 py-3 md:w-12 rounded-md">
+          <button type="button" disabled aria-hidden="true" class="w-10 h-10  border border-black">
             ...
           </button>
         </div>
@@ -55,9 +54,9 @@
           <button
             type="button"
             :class="[
-              'px-4 py-3 md:w-12 rounded-md',
+              'w-10 h-10 border border-black',
               {
-                'hover:bg-black hover:text-primary-800 active:bg-black active:text-white': !disabled,
+                'hover:bg-black hover:text-white active:bg-black active:text-white': !disabled,
               },
             ]"
             :aria-current="pagination.endPage - 1 === pagination.selectedPage"
@@ -72,19 +71,19 @@
       <li v-for="page in pagination.pages" :key="`page-${page}`">
         <div
           :class="[
-            'flex border-transparent',
-            { 'font-medium !border-primary-500': pagination.selectedPage === page },
+            'flex',
+            { 'font-medium': pagination.selectedPage === page },
           ]"
         >
           <button
             type="button"
             :class="[
-              'px-4 py-3 md:w-12 rounded-md border border-[#E5E5E5]',
+              'w-10 h-10 border border-black',
               {
-                'hover:bg-black hover:!text-white active:bg-black active:text-white': !disabled,
+                'hover:bg-black hover:text-white active:bg-black active:text-white': !disabled,
               },
               {
-                '!bg-black !text-white hover:!text-white active:!text-white': pagination.selectedPage === page,
+                'bg-black !text-white': pagination.selectedPage === page,
               },
             ]"
             :aria-current="pagination.selectedPage === page"
@@ -101,7 +100,7 @@
           <button
             type="button"
             :class="[
-              'px-4 py-3 md:w-12 rounded-md',
+              'w-10 h-10 border border-black',
               {
                 'hover:bg-black hover:text-white active:bg-black active:text-white': !disabled,
               },
@@ -116,7 +115,7 @@
       </li>
       <li v-if="pagination.endPage < pagination.totalPages - 1">
         <div class="flex">
-          <button type="button" disabled aria-hidden="true" class="px-4 py-3 md:w-12 rounded-md">
+          <button type="button" disabled aria-hidden="true" class="w-10 h-10 border border-black">
             ...
           </button>
         </div>
@@ -125,15 +124,15 @@
         <div
           :class="[
             'flex',
-            { 'font-medium border-t-4 !border-primary-500': pagination.selectedPage === pagination.totalPages },
+            { 'font-medium': pagination.selectedPage === pagination.totalPages },
           ]"
         >
           <button
             type="button"
             :class="[
-              'px-4 py-3 md:w-12 rounded-md text-neutral-500',
+              'w-10 h-10 border border-black',
               {
-                'hover:bg-black hover:text-primary-800 active:bg-black active:text-white': !disabled,
+                'hover:bg-black hover:text-white active:bg-black active:text-white': !disabled,
               },
             ]"
             :aria-current="pagination.totalPages === pagination.selectedPage"
@@ -147,15 +146,14 @@
       </li>
     </ul>
     <UiButton
-      size="lg"
       :aria-label="t('nextAriaLabel')"
       :disabled="pagination.selectedPage >= pagination.totalPages || disabled"
-      variant="tertiary"
-      class="gap-3"
+      variant="secondary"
+      :square="true"
+      class="!rounded-none !w-10 !h-10 hover:!bg-black hover:!text-white active:!bg-black active:!text-white"
       data-testid="pagination-next"
       @click="nextPage"
     >
-      <span class="hidden sm:inline-flex">{{ t('next') }}</span>
       <template #suffix>
         <SfIconChevronRight />
       </template>

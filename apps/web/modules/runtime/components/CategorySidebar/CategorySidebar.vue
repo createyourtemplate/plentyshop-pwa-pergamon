@@ -12,20 +12,21 @@
       :model-value="true"
       :disable-click-away="true"
       :disable-esc="true"
-      class="w-full md:w-auto md:flex-grow rounded shadow-none md:translate-x-0 z-[100] md:z-0 md:relative md:!flex md:items-center -translate-x-full shrink-0 bg-white overflow-y-auto md:overflow-y-visible"
+      class="w-full rounded shadow-none md:translate-x-0 z-[100] md:relative md:!block -translate-x-full shrink-0 bg-white overflow-y-auto md:overflow-y-visible"
       data-testid="category-sidebar"
     >
-      <div class="h-full md:flex md:flex-grow md:items-baseline md:gap-[30px]">
-        <div class="px-[20px] py-[10px] flex justify-between items-center" v-if="viewport.isLessThan('md')">
-          <UiButton variant="tertiary" class="!text-black !bg-white !hover:bg-white !p-0 ml-auto" :aria-label="t('closeListSettings')" @click="$emit('close')">
+      <div class="flex flex-col h-full md:h-auto md:block">
+        <div class="p-4 flex justify-between items-center md:hidden">
+          <span class="font-bold text-lg">{{ t('listSettings') }}</span>
+          <UiButton variant="primary" class="!rounded-none !p-1" size="sm" :aria-label="t('closeListSettings')" @click="$emit('close')">
             <template #prefix>
-              <SfIconClose />
+              <SfIconClose size="sm" class=" text-white" />
             </template>
           </UiButton>
         </div>
         <slot class="overflow-y-auto md:overflow-y-visible py-4 md:p-0" />
-        <div class="px-[20px] flex flex-wrap justify-between md:border-0 gap-3 border-t border-[#E5E5E5] pt-[20px] md:hidden">
-          <UiButton class="!bg-black whitespace-nowrap flex flex-1" variant="primary" @click="$emit('close')">
+        <div class="md:mt-2 flex flex-wrap justify-between border-t border-t-neutral-200 md:border-0 gap-3 mt-auto">
+          <UiButton class="md:hidden whitespace-nowrap !rounded-none flex flex-1 !h-auto" variant="primary" @click="$emit('close')">
             {{ t('showProducts') }}
           </UiButton>
         </div>
@@ -39,7 +40,6 @@ import { SfDrawer, SfIconClose } from '@storefront-ui/vue';
 import type { CategorySidebarEmits, CategorySidebarProps } from '~/components/CategorySidebar/types';
 
 const { t } = useI18n();
-const viewport = useViewport();
 
 defineProps<CategorySidebarProps>();
 defineEmits<CategorySidebarEmits>();

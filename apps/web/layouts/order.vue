@@ -6,11 +6,9 @@
     </NarrowContainer>
   </main>
   <ClientOnly>
-    <FooterBlock v-if="!route.meta.isBlockified" />
+    <Footer />
   </ClientOnly>
 </template>
 <script setup lang="ts">
-import FooterBlock from '~/components/blocks/Footer/Footer.vue';
-
-const route = useRoute();
+import Footer from '~/modules/runtime/components/ui/Footer/Footer.vue';
 </script>

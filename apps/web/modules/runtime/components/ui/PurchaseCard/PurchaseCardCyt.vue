@@ -53,6 +53,7 @@
             </div>
             <div class="inline-flex items-center mt-4 mb-2">
               <SfRating
+                class="!text-black"
                 size="xs"
                 :half-increment="true"
                 :value="reviewGetters.getAverageRating(reviewAverage, 'half')"

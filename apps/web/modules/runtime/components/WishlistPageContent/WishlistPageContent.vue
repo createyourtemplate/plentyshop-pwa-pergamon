@@ -1,6 +1,11 @@
 <template>
   <NarrowContainer class="mb-20 px-4 md:px-0" data-testid="wishlist-layout">
-    <HeaderWithLink v-if="withHeader && title" :heading="t('Merkliste')" :label-desktop="t('back')" :label-mobile="t('back')" />
+    <div class="flex justify-between items-center mt-8 mb-10 px-4 md:px-0">
+      <h1 class="font-semibold text-[40px] font-[CormorantGaramond]">Merkliste</h1>
+      <div>
+        <span class="text-2xl">{{ products.length }} Artikel</span>
+      </div>
+    </div>
 
     <div
       v-if="products.length > 0"
@@ -25,11 +30,7 @@
               productGetters.getName(product) ||
               ''
             "
-            :image-title="
-              productImageGetters.getImageName(productImageGetters.getFirstImage(product)) ||
-              productGetters.getName(product) ||
-              ''
-            "
+            :image-title="productImageGetters.getImageName(productImageGetters.getFirstImage(product)) || ''"
             :image-height="productGetters.getImageHeight(product) || 600"
             :image-width="productGetters.getImageWidth(product) || 600"
             :slug="productGetters.getSlug(product) + `-${productGetters.getId(product)}`"
@@ -58,33 +59,13 @@
         {{ t('emptyWishlist') }}
       </h2>
     </div>
-    <div v-if="products.length > 0" class="mt-4 mb-4 typography-text-xs flex gap-1">
-      <span>{{ t('asterisk') }}</span>
-      <span v-if="showNetPrices">{{ t('itemExclVAT') }}</span>
-      <span v-else>{{ t('itemInclVAT') }}</span>
-      <i18n-t keypath="excludedShipping" scope="global">
-        <template #shipping>
-          <SfLink
-            :href="localePath(paths.shipping)"
-            target="_blank"
-            class="focus:outline focus:outline-offset-2 focus:outline-2 outline-secondary-600 rounded"
-          >
-            {{ t('delivery') }}
-          </SfLink>
-        </template>
-      </i18n-t>
-    </div>
   </NarrowContainer>
 </template>
 
 <script setup lang="ts">
 import { productGetters, productImageGetters } from '@plentymarkets/shop-api';
-import { SfLoaderCircular, SfLink } from '@storefront-ui/vue';
+import { SfLoaderCircular } from '@storefront-ui/vue';
 import type { WishlistPageContentProps } from '~/components/WishlistPageContent/types';
-import { paths } from '~/utils/paths';
-
-const { showNetPrices } = useCustomer();
-const localePath = useLocalePath();
 
 const { withHeader = true } = defineProps<WishlistPageContentProps>();
 const { t } = useI18n();

@@ -17,13 +17,13 @@
       <PreviewMode />
     </NuxtLazyHydrate>
     <ClientOnly>
-      <FooterBlock v-if="!route.meta.isBlockified" />
+      <Footer />
     </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
-import FooterBlock from '~/components/blocks/Footer/Footer.vue';
+import Footer from '~/modules/runtime/components/ui/Footer/Footer.vue';
 
 defineProps<{
   heading: string;
